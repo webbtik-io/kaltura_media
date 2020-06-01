@@ -53,6 +53,13 @@ class KalturaItem extends FieldItemBase {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  public static function mainPropertyName() {
+    return 'entry_id';
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function getConstraints() {
@@ -91,7 +98,6 @@ class KalturaItem extends FieldItemBase {
 
     $schema = [
       'columns' => $columns,
-      // @DCG Add indexes here if necessary.
     ];
 
     return $schema;
