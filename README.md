@@ -7,7 +7,7 @@ This module allows you to use [Kaltura](https://corp.kaltura.com) into your Drup
 
 This module provides the following:
 - Kaltura Field Type (with field widget and field formatter)
-- Kaltura theme hook to render playe
+- Kaltura theme hook to render player
 - Kaltura Media source to create media entity type
 
 With this module you can create a new Media Entity Type using the provided
