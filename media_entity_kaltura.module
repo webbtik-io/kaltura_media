@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Media Entity Kaltura module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function media_entity_kaltura_theme() {
+  return [
+    'kaltura_player' => [
+      'variables' => [
+        'partnerId' => '',
+        'uiConfId' => '',
+        'entryId' => '',
+      ],
+      'template' => 'kaltura-player',
+    ],
+  ];
+}

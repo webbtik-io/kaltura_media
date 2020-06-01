@@ -1,0 +1,14 @@
+# Default value.
+field.value.media_entity_kaltura_kaltura:
+  type: mapping
+  label: Default value
+  mapping:
+    entry_id:
+      type: string
+      label: Entry ID
+    partner_id:
+      type: string
+      label: Kaltura Account ID (partnerId)
+    uiconf_id:
+      type: string
+      label: Kaltura Player ID (uiconf_id)
