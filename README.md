@@ -1,5 +1,5 @@
-Media Entity Kaltura
-====================
+Kaltura Media
+==============
 
 # Introduction
 

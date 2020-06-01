@@ -8,7 +8,7 @@
 /**
  * Implements hook_theme().
  */
-function media_entity_kaltura_theme() {
+function kaltura_media_theme() {
   return [
     'kaltura_player' => [
       'variables' => [

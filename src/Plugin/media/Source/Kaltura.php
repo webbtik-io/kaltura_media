@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\media_entity_kaltura\Plugin\media\Source;
+namespace Drupal\kaltura_media\Plugin\media\Source;
 
 use Drupal\media\MediaSourceBase;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
@@ -11,7 +11,7 @@ use Drupal\media\MediaInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\File\FileSystemInterface;
-use Drupal\media_entity_kaltura\Plugin\Field\FieldType\KalturaItem;
+use Drupal\kaltura_media\Plugin\Field\FieldType\KalturaItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use GuzzleHttp\ClientInterface;
@@ -187,7 +187,7 @@ class Kaltura extends MediaSourceBase {
    * If the thumbnail is not already locally stored, this method will attempt
    * to download it.
    *
-   * @param \Drupal\media_entity_kaltura\Plugin\Field\FieldType\KalturaItem $kaltura_item
+   * @param \Drupal\kaltura_media\Plugin\Field\FieldType\KalturaItem $kaltura_item
    *   The kaltura field item.
    *
    * @return string|null

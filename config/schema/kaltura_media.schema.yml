@@ -1,5 +1,5 @@
 # Default value.
-field.value.media_entity_kaltura_kaltura:
+field.value.kaltura_media_kaltura:
   type: mapping
   label: Default value
   mapping:

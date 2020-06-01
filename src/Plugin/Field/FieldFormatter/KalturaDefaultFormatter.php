@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\media_entity_kaltura\Plugin\Field\FieldFormatter;
+namespace Drupal\kaltura_media\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;

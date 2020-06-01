@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\media_entity_kaltura\Plugin\Field\FieldWidget;
+namespace Drupal\kaltura_media\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
@@ -47,7 +47,7 @@ class KalturaWidget extends WidgetBase {
     $element['#theme_wrappers'] = ['container', 'form_element'];
     $element['#attributes']['class'][] = 'container-inline';
     $element['#attributes']['class'][] = 'media-entity-kaltura-kaltura-elements';
-    $element['#attached']['library'][] = 'media_entity_kaltura/media_entity_kaltura_kaltura';
+    $element['#attached']['library'][] = 'kaltura_media/kaltura_media_kaltura';
 
     return $element;
   }

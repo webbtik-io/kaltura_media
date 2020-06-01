@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\media_entity_kaltura\Plugin\Field\FieldType;
+namespace Drupal\kaltura_media\Plugin\Field\FieldType;
 
 use Drupal\Component\Utility\Random;
 use Drupal\Core\Field\FieldDefinitionInterface;
