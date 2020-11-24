@@ -34,6 +34,9 @@ class KalturaItem extends FieldItemBase {
     elseif ($this->uiconf_id !== NULL) {
       return FALSE;
     }
+    elseif ($this->domain !== NULL) {
+      return FALSE;
+    }
     return TRUE;
   }
 
@@ -48,6 +51,8 @@ class KalturaItem extends FieldItemBase {
       ->setLabel(t('Kaltura Account ID (partnerId)'));
     $properties['uiconf_id'] = DataDefinition::create('string')
       ->setLabel(t('Kaltura Player ID (uiconf_id)'));
+    $properties['domain'] = DataDefinition::create('string')
+      ->setLabel(t('Kaltura Domain'));
 
     return $properties;
   }
@@ -70,6 +75,8 @@ class KalturaItem extends FieldItemBase {
     $options['partner_id']['NotBlank'] = [];
 
     $options['uiconf_id']['NotBlank'] = [];
+
+    $options['domain']['NotBlank'] = [];
 
     $constraint_manager = \Drupal::typedDataManager()->getValidationConstraintManager();
     $constraints[] = $constraint_manager->create('ComplexData', $options);
@@ -94,6 +101,10 @@ class KalturaItem extends FieldItemBase {
         'type' => 'varchar',
         'length' => 255,
       ],
+      'domain' => [
+        'type' => 'varchar',
+        'length' => 255,
+      ],
     ];
 
     $schema = [
@@ -115,6 +126,8 @@ class KalturaItem extends FieldItemBase {
     $values['partner_id'] = $random->word(mt_rand(1, 10));
 
     $values['uiconf_id'] = $random->word(mt_rand(1, 10));
+
+    $values['domain'] = 'cdnapisec.kaltura.com';
 
     return $values;
   }

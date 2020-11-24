@@ -38,6 +38,10 @@ class KalturaDefaultFormatter extends FormatterBase {
         $element[$delta]['#uiConfId'] = $item->uiconf_id;
       }
 
+      if ($item->domain) {
+        $element[$delta]['#domain'] = $item->domain;
+      }
+
     }
     return $element;
   }

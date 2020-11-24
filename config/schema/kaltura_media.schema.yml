@@ -12,3 +12,6 @@ field.value.kaltura_media_kaltura:
     uiconf_id:
       type: string
       label: Kaltura Player ID (uiconf_id)
+    domain:
+      type: string
+      label: Domain

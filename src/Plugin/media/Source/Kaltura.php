@@ -15,6 +15,8 @@ use Drupal\kaltura_media\Plugin\Field\FieldType\KalturaItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\RequestException;
+use Drupal\Core\Logger\LoggerChannelFactory;
 
 /**
  * Kaltura Media Source.
@@ -58,6 +60,13 @@ class Kaltura extends MediaSourceBase {
   protected $streamWrapperManager;
 
   /**
+   * Logger channel.
+   *
+   * @var \Drupal\Core\Logger\LoggerChannelInterface
+   */
+  protected $logger;
+
+  /**
    * Construct.
    */
   public function __construct(
@@ -70,13 +79,15 @@ class Kaltura extends MediaSourceBase {
       ConfigFactoryInterface $config_factory,
       StreamWrapperManagerInterface $stream_wrapper_manager,
       FileSystemInterface $file_system,
-      ClientInterface $http_client
+      ClientInterface $http_client,
+      LoggerChannelFactory $logger_channel_factory
     ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $entity_type_manager, $entity_field_manager, $field_type_manager, $config_factory);
     $this->streamWrapperManager = $stream_wrapper_manager;
     $this->fileSystem = $file_system;
     $this->httpClient = $http_client;
-    $this->thumbnailApiUrl = 'https://cdnsecakmi.kaltura.com/p/{partner_id}/thumbnail/entry_id/{entry_id}';
+    $this->thumbnailApiUrl = 'https://{domain}/p/{partner_id}/thumbnail/entry_id/{entry_id}';
+    $this->logger = $logger_channel_factory->get('kaltura_media');
   }
 
   /**
@@ -93,7 +104,8 @@ class Kaltura extends MediaSourceBase {
       $container->get('config.factory'),
       $container->get('stream_wrapper_manager'),
       $container->get('file_system'),
-      $container->get('http_client')
+      $container->get('http_client'),
+      $container->get('logger.factory')
     );
   }
 
@@ -196,6 +208,7 @@ class Kaltura extends MediaSourceBase {
    */
   protected function getLocalThumbnailUri(KalturaItem $kaltura_item) {
     $remote_thumbnail_url = $this->thumbnailApiUrl;
+    $remote_thumbnail_url = str_replace('{domain}', $kaltura_item->domain, $remote_thumbnail_url);
     $remote_thumbnail_url = str_replace('{partner_id}', $kaltura_item->partner_id, $remote_thumbnail_url);
     $remote_thumbnail_url = str_replace('{entry_id}', $kaltura_item->entry_id, $remote_thumbnail_url);
 
@@ -225,6 +238,11 @@ class Kaltura extends MediaSourceBase {
         $this->fileSystem->saveData((string) $response->getBody(), $local_thumbnail_uri, FileSystemInterface::EXISTS_REPLACE);
         return $local_thumbnail_uri;
       }
+    }
+    catch (RequestException $e) {
+      $this->logger->warning('Could not download remote thumbnail from {url}.', [
+        'url' => $remote_thumbnail_url,
+      ]);
     }
     catch (RequestException $e) {
       $this->logger->warning($e->getMessage());

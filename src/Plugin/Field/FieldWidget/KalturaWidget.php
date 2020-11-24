@@ -44,6 +44,13 @@ class KalturaWidget extends WidgetBase {
       '#size' => 20,
     ];
 
+    $element['domain'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Kaltura Player Domain'),
+      '#default_value' => isset($items[$delta]->domain) ? $items[$delta]->domain : 'cdnapisec.kaltura.com',
+      '#size' => 20,
+    ];
+
     $element['#theme_wrappers'] = ['container', 'form_element'];
     $element['#attributes']['class'][] = 'container-inline';
     $element['#attributes']['class'][] = 'media-entity-kaltura-kaltura-elements';
@@ -72,6 +79,9 @@ class KalturaWidget extends WidgetBase {
       }
       if ($value['uiconf_id'] === '') {
         $values[$delta]['uiconf_id'] = NULL;
+      }
+      if ($value['domain'] === '') {
+        $values[$delta]['domain'] = NULL;
       }
     }
     return $values;

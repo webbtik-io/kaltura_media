@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Install file for kaltura_media.
+ */
+
+use Drupal\Core\Entity\Sql\SqlContentEntityStorage;
+
+/**
+ * Add new domain property.
+ */
+function kaltura_media_update_8001() {
+  $field_type = 'kaltura';
+  $property = 'domain';
+  $manager = Drupal::entityDefinitionUpdateManager();
+  $field_map = Drupal::service('entity_field.manager')
+    ->getFieldMapByFieldType($field_type);
+  foreach ($field_map as $entity_type_id => $fields) {  
+    foreach (array_keys($fields) as $field_name) {
+      $field_storage_definition = $manager->getFieldStorageDefinition($field_name, $entity_type_id);
+      $storage = Drupal::entityTypeManager()->getStorage($entity_type_id);  
+      if ($storage instanceof SqlContentEntityStorage) {
+        $table_mapping = $storage->getTableMapping([
+          $field_name => $field_storage_definition,
+        ]);
+        $table_names = $table_mapping->getDedicatedTableNames();
+        $columns = $table_mapping->getColumnNames($field_name);
+        foreach ($table_names as $table_name) {
+          $field_schema = $field_storage_definition->getSchema();
+          $schema = Drupal::database()->schema();
+          $field_exists = $schema->fieldExists($table_name, $columns[$property]);
+          $table_exists = $schema->tableExists($table_name);  
+          if (!$field_exists && $table_exists) {
+            $schema->addField($table_name, $columns[$property], $field_schema['columns'][$property]);
+          }
+        }
+      }
+      $manager->updateFieldStorageDefinition($field_storage_definition);
+    }
+  }
+}

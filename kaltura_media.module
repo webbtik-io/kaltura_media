@@ -15,6 +15,7 @@ function kaltura_media_theme() {
         'partnerId' => '',
         'uiConfId' => '',
         'entryId' => '',
+        'domain' => 'cdnapisec.kaltura.com',
       ],
       'template' => 'kaltura-player',
     ],
