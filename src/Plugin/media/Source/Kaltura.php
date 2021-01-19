@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
-use Drupal\Core\Logger\LoggerChannelFactory;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 /**
  * Kaltura Media Source.
@@ -80,7 +80,7 @@ class Kaltura extends MediaSourceBase {
       StreamWrapperManagerInterface $stream_wrapper_manager,
       FileSystemInterface $file_system,
       ClientInterface $http_client,
-      LoggerChannelFactory $logger_channel_factory
+      LoggerChannelFactoryInterface $logger_channel_factory
     ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $entity_type_manager, $entity_field_manager, $field_type_manager, $config_factory);
     $this->streamWrapperManager = $stream_wrapper_manager;
