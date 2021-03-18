@@ -27,6 +27,9 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
  *   description = @Translation("Use Kaltura for reusable media."),
  *   allowed_field_types = {"kaltura"},
  *   default_thumbnail_filename = "no-thumbnail.png",
+ *   forms = {
+ *     "media_library_add" = "Drupal\kaltura_media\Form\KalturaForm"
+ *   }
  * )
  */
 class Kaltura extends MediaSourceBase {
