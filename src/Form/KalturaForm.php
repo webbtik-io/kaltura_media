@@ -25,7 +25,22 @@ class KalturaForm extends AddFormBase {
   protected function buildInputElement(array $form, FormStateInterface $form_state) {
     $media_type = $this->getMediaType($form_state);
 
-    // Add a container to group the input elements for styling purposes.
+    // Get field configuration and default values for partner and player IDs.
+    $field_media = $media_type->getSource()
+      ->getSourceFieldDefinition($media_type);
+    $field_defaults = $field_media->get('default_value');
+    $default_value_partner_id = NULL;
+    $default_value_uiconf_id = NULL;
+    if (isset($field_defaults[0])) {
+      $defaults = $field_defaults[0];
+      if (isset($defaults['partner_id'])) {
+        $default_value_partner_id = $defaults['partner_id'];
+      }
+      if (isset($defaults['uiconf_id'])) {
+        $default_value_uiconf_id = $defaults['uiconf_id'];
+      }
+    }
+
     $form['container'] = [
       '#type' => 'container',
     ];
@@ -40,12 +55,14 @@ class KalturaForm extends AddFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Kaltura Account ID (partnerId)'),
       '#size' => 20,
+      '#default_value' => $default_value_partner_id,
     ];
 
     $form['container']['uiconf_id'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Kaltura Player ID (uiconf_id)'),
       '#size' => 20,
+      '#default_value' => $default_value_uiconf_id,
     ];
 
     $form['container']['domain'] = [
