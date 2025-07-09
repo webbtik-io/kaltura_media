@@ -14,7 +14,7 @@ use Drupal\Core\TypedData\DataDefinition;
  * @FieldType(
  *   id = "kaltura",
  *   label = @Translation("Kaltura"),
- *   category = @Translation("General"),
+ *   category = "general",
  *   default_widget = "kaltura",
  *   default_formatter = "kaltura_default"
  * )

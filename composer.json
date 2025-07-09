@@ -1,0 +1,8 @@
+{
+  "name": "drupal/kaltura_media",
+  "type": "drupal-module",
+  "description": "Media Integration for Kaltura Videos.",
+  "require": {
+    "drupal/core": "^9.3 | ^10 | ^11"
+  }
+}
