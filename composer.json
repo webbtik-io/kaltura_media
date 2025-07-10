@@ -1,8 +1,15 @@
 {
-  "name": "drupal/kaltura_media",
+  "name": "webbtik/kaltura_media",
+  "description": "Drupal module for Kaltura media integration, upgraded for Drupal 11.",
   "type": "drupal-module",
-  "description": "Media Integration for Kaltura Videos.",
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
   "require": {
-    "drupal/core": "^9.3 | ^10 | ^11"
+    "drupal/core": "^9 || ^10 || ^11"
+  },
+  "extra": {
+    "drupal": {
+      "package": "Media"
+    }
   }
 }
